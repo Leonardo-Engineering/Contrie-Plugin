@@ -1,0 +1,17 @@
+{
+  "name": "contrie",
+  "owner": {
+    "name": "Contrie",
+    "email": "support@contrie.com"
+  },
+  "metadata": {
+    "description": "Contrie's plugin for Claude: web data with evidence from one public page."
+  },
+  "plugins": [
+    {
+      "name": "contrie",
+      "source": "./",
+      "description": "Validated JSON with a per-field source check and signed evidence, or clean markdown, from one public web page."
+    }
+  ]
+}

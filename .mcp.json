@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "contrie": {
+      "type": "http",
+      "url": "https://www.contrie.com/mcp"
+    }
+  }
+}
