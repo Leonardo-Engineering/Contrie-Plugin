@@ -1,7 +1,7 @@
 {
   "name": "contrie",
   "version": "1.0.0",
-  "description": "Turn a public web page into validated JSON with a per-field source check and signed evidence, or into clean markdown, through Contrie's hosted MCP server.",
+  "description": "Turn a public web page into JSON with an acceptance decision and the page excerpt behind each value, or into clean markdown, through Contrie's hosted MCP server.",
   "author": { "name": "Contrie", "email": "support@contrie.com", "url": "https://www.contrie.com" },
   "homepage": "https://www.contrie.com/docs/mcp",
   "license": "MIT",

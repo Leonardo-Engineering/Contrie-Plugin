@@ -11,7 +11,7 @@
     {
       "name": "contrie",
       "source": "./",
-      "description": "Validated JSON with a per-field source check and signed evidence, or clean markdown, from one public web page."
+      "description": "JSON with an acceptance decision and the page excerpt behind each value, or clean markdown, from one public web page."
     }
   ]
 }
