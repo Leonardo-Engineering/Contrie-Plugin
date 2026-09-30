@@ -21,7 +21,8 @@ The `contrie` MCP server in this plugin provides the tools below.
 
 ## When it does not
 
-- Finding pages: Contrie is not a search engine. Find the URL first, then extract.
+- Finding pages on the open web: Contrie is not a web search engine. Find the URL first, then extract.
+  `contrie_search` covers only Contrie's curated index of public technical reference pages.
 - Many pages or a whole site: one page per call; it never follows links or crawls.
 - PDFs, images, audio, video, archives and other files: refused at 0 credits.
 - reddit.com (refused as `FETCH_FAILED` at 0 credits), and pages behind a login or paywall.
@@ -35,6 +36,7 @@ The `contrie` MCP server in this plugin provides the tools below.
 |---|---|---|
 | `contrie_extract` | Get fields from a page: `url`, plus `extract` (plain language) and/or `schema` (JSON Schema for the exact shape) | 1, 3, 8 or 15 when accepted, +2 if rendered; 0 if not accepted |
 | `contrie_read` | Get the page as markdown to read yourself | 1, +2 if rendered; 0 if the page could not be read |
+| `contrie_search` | Find dated, citable snippets (`query`, optional `limit` 1-10) in Contrie's curated index of public technical reference pages (HTTP, robots.txt, MCP, bot verification). Not the open web; read a result's `url` in full with `contrie_read` | 1 with results; 0 with none |
 | `contrie_verify` | Check `data` you already have against a `url` (or raw `html`/`text`) | 0 |
 | `contrie_watch` | Re-run one extraction on a schedule (`every` minutes, min 15) and record changes | each run with an accepted answer is charged like an extraction |
 | `contrie_changes`, `contrie_monitors`, `contrie_unwatch` | Read a monitor's history, list monitors, stop one | 0 |

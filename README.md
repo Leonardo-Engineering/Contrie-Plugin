@@ -11,12 +11,14 @@ when Contrie fits a task and how to read its results honestly.
   with an acceptance decision, a quality score and the page excerpt behind each value. An answer
   that is not accepted is not returned and costs 0 credits.
 - **`contrie_read`**: the page as markdown.
+- **`contrie_search`**: snippets from Contrie's curated index of public technical reference pages,
+  with URL, fetch time and content hash (1 credit with results, 0 without). Not the open web.
 - **`contrie_verify`**: check whether values you already have appear in their source page (0 credits).
 - **`contrie_watch`**, **`contrie_changes`**, **`contrie_monitors`**, **`contrie_unwatch`**:
   watch a page for a changed answer and manage those monitors.
 - **`contrie_account`**: your credits and any current restrictions.
 
-One page per call: Contrie is not a search engine or a crawler, and it reads web pages, not PDFs
+One page per call: Contrie is not a web search engine or a crawler, and it reads web pages, not PDFs
 or other files. Its source check confirms that a value's text appears on the page, not that the
 page states it about that field.
 
