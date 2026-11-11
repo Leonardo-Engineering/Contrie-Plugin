@@ -1,9 +1,12 @@
-# Contrie plugin for Claude
+# Contrie Plugin for Claude
 
-Turn one public web page into the data you ask for: JSON with an acceptance decision and the page
-excerpt behind each value, or clean, structure-preserving markdown. This plugin connects Claude to
-Contrie's hosted MCP server (`https://www.contrie.com/mcp`) and adds a skill that tells Claude
-when Contrie fits a task and how to read its results honestly.
+Contrie turns one public web page into the data you ask for. You get JSON with an acceptance
+decision and the page excerpt behind each value, or the page as clean markdown that keeps its
+structure. This plugin connects Claude to Contrie's hosted MCP server
+(`https://www.contrie.com/mcp`) and adds a skill that tells Claude when Contrie fits a task and
+how to read its results honestly.
+
+The same server works as a Claude connector and in Codex. Setup for each is below.
 
 ## What you get
 
@@ -24,16 +27,40 @@ page states it about that field.
 
 ## Install
 
-This plugin is not published yet. Install it in Claude Code from a local copy of this folder:
+### Claude Code (plugin)
 
 ```
-/plugin marketplace add /path/to/contrie-claude-plugin
+/plugin marketplace add DaVinciPicks/Contrie-Claude-Plugin
 /plugin install contrie@contrie
 ```
 
-Then open `/mcp`, choose `contrie` and sign in with your Contrie account. No API key is needed; a
-Free account can be created during sign-in and includes up to 200 credits a month. Pricing:
-https://www.contrie.com/pricing. Documentation: https://www.contrie.com/docs/mcp.
+Then open `/mcp`, choose `contrie` and sign in with your Contrie account.
+
+### Claude (connector)
+
+In claude.ai, go to Customize, Connectors, Add, Add custom connector, and enter
+`https://www.contrie.com/mcp`. Sign in when Claude asks. This adds the tools without the skill.
+
+### Codex
+
+```bash
+codex mcp add contrie --url https://www.contrie.com/mcp
+codex mcp login contrie --scopes contrie:account,offline_access
+```
+
+These commands were checked against Codex CLI 0.157.1. If you open this folder in Codex, the
+included `.codex/config.toml` already points at the server, so only the login step is needed.
+
+### Any client
+
+No API key is needed for any of these. Sign-in is OAuth, and a Free account can be created during
+sign-in with up to 200 credits a month. Clients with no browser, such as CI, send an API key from
+the [dashboard](https://www.contrie.com/dashboard/keys) as an `Authorization: Bearer` header.
+
+To check the connection, ask for `contrie_account` (0 credits), then try `contrie_read` on
+`https://example.com/` (1 credit on success).
+
+Pricing: https://www.contrie.com/pricing. Documentation: https://www.contrie.com/docs/mcp.
 
 ## Privacy Policy
 
