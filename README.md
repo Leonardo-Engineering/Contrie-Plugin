@@ -14,7 +14,8 @@ when Contrie fits a task and how to read its results honestly.
   that is not accepted is not returned and costs 0 credits.
 - **`contrie_read`**: the page as markdown.
 - **`contrie_search`**: snippets from Contrie's curated index of public technical reference pages,
-  with URL, fetch time and content hash (1 credit with results, 0 without). Not the open web.
+  with URL, fetch time and content hash (1 credit with results, 0 without). It does not search
+  the open web.
 - **`contrie_verify`**: check whether values you already have appear in their source page (0 credits).
 - **`contrie_watch`**, **`contrie_changes`**, **`contrie_monitors`**, **`contrie_unwatch`**:
   watch a page for a changed answer and manage those monitors.
