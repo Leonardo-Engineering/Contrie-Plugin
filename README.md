@@ -1,12 +1,11 @@
-# Contrie Plugin for Claude
+# Contrie Plugin for Claude and Codex
 
 Contrie turns one public web page into the data you ask for. You get JSON with an acceptance
 decision and the page excerpt behind each value, or the page as clean markdown that keeps its
-structure. This plugin connects Claude to Contrie's hosted MCP server
-(`https://www.contrie.com/mcp`) and adds a skill that tells Claude when Contrie fits a task and
-how to read its results honestly.
-
-The same server works as a Claude connector and in Codex. Setup for each is below.
+structure. This repo connects Claude and Codex to Contrie's hosted MCP server
+(`https://www.contrie.com/mcp`). It works three ways: as a Claude Code plugin, as a Claude
+connector, and as a Codex connector. The Claude Code plugin also adds a skill that tells Claude
+when Contrie fits a task and how to read its results honestly.
 
 ## What you get
 
@@ -30,7 +29,7 @@ page states it about that field.
 ### Claude Code (plugin)
 
 ```
-/plugin marketplace add DaVinciPicks/Contrie-Claude-Plugin
+/plugin marketplace add DaVinciPicks/Contrie-Plugin
 /plugin install contrie@contrie
 ```
 
@@ -41,7 +40,7 @@ Then open `/mcp`, choose `contrie` and sign in with your Contrie account.
 In claude.ai, go to Customize, Connectors, Add, Add custom connector, and enter
 `https://www.contrie.com/mcp`. Sign in when Claude asks. This adds the tools without the skill.
 
-### Codex
+### Codex (connector)
 
 ```bash
 codex mcp add contrie --url https://www.contrie.com/mcp
