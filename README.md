@@ -30,7 +30,7 @@ page states it about that field.
 ### Claude Code (plugin)
 
 ```
-/plugin marketplace add DaVinciPicks/Contrie-Plugin
+/plugin marketplace add Leonardo-Engineering/Contrie-Plugin
 /plugin install contrie@contrie
 ```
 
