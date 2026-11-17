@@ -12,7 +12,9 @@ when Contrie fits a task and how to read its results honestly.
 - **`contrie_extract`**: fields from a page, described in plain language or as a JSON Schema,
   with an acceptance decision, a quality score and the page excerpt behind each value. An answer
   that is not accepted is not returned and costs 0 credits.
-- **`contrie_read`**: the page as markdown.
+- **`contrie_read`**: the page as markdown. For a long page, `maxChars` returns verbatim passages
+  inside that size, `objective` picks the passages that share the most words with what you are
+  looking for, and `offset` continues where a read stopped. Same price, no model involved.
 - **`contrie_search`**: snippets from Contrie's curated index of public technical reference pages,
   with URL, fetch time and content hash (1 credit with results, 0 without). It does not search
   the open web.
@@ -24,6 +26,11 @@ when Contrie fits a task and how to read its results honestly.
 One page per call: Contrie is not a web search engine or a crawler, and it reads web pages, not PDFs
 or other files. Its source check confirms that a value's text appears on the page, not that the
 page states it about that field.
+
+A tool that takes arguments refuses one it does not know, before any charge, and says what to send
+instead (for example `prompt` → `extract`). A JSON Schema with a value that is not valid JSON Schema,
+such as a `type` outside the seven JSON Schema types, is answered as `INVALID_REQUEST` at 0 credits
+when the readers refuse it.
 
 ## Install
 
