@@ -35,12 +35,28 @@ The `contrie` MCP server in this plugin provides the tools below.
 | Tool | Use it to | Credits |
 |---|---|---|
 | `contrie_extract` | Get fields from a page: `url`, plus `extract` (plain language) and/or `schema` (JSON Schema for the exact shape) | 1, 3, 8 or 15 when accepted, +2 if rendered; 0 if not accepted |
-| `contrie_read` | Get the page as markdown to read yourself | 1, +2 if rendered; 0 if the page could not be read |
+| `contrie_read` | Get the page as markdown to read yourself; on a long page add `maxChars` (and `objective` or `offset`, below) | 1, +2 if rendered; 0 if the page could not be read |
 | `contrie_search` | Find dated, citable snippets (`query`, optional `limit` 1-10) in Contrie's curated index of public technical reference pages (HTTP, robots.txt, MCP, bot verification). Not the open web; read a result's `url` in full with `contrie_read` | 1 with results; 0 with none |
 | `contrie_verify` | Check `data` you already have against a `url` (or raw `html`/`text`) | 0 |
 | `contrie_watch` | Re-run one extraction on a schedule (`every` minutes, min 15) and record changes | each run with an accepted answer is charged like an extraction |
 | `contrie_changes`, `contrie_monitors`, `contrie_unwatch` | Read a monitor's history, list monitors, stop one | 0 |
 | `contrie_account` | See your credits and any restrictions | 0 |
+
+## Long pages
+
+A full read can be up to 100,000 characters. To keep it inside your context:
+
+- Send `maxChars` (500 to 100,000, for example 8000) to `contrie_read`. You get verbatim text
+  inside that size: whole blocks where they fit, and a passage larger than the size is cut
+  (`metadata.focus.cutInsideBlock` is true).
+- `metadata.focus.omitted` lists the sections left out, each with the `offset` to send to read it;
+  `metadata.focus.nextOffset` continues a read in page order. An `offset` past the end is refused
+  at 0 credits.
+- Add `objective` (plain words, ideally the page's own vocabulary) only when you know what you are
+  looking for. It picks passages by word overlap, with no model, so it can miss: if the answer is
+  not there, read the likely section by its `offset` before giving up.
+- A line `<!-- contrie: N characters omitted -->` marks each gap. Rely on `metadata.focus`, not on
+  that line, since a page can contain the same text.
 
 ## Reading a result honestly
 
@@ -58,6 +74,11 @@ The `contrie` MCP server in this plugin provides the tools below.
   issued it and that it is unchanged, not that the page is true.
 - Say where a value came from: cite the URL, and quote the excerpt when the user will act on it.
 - `metadata.credits` is what the call cost.
+- An argument a tool does not take is refused with a message naming it and, where it can, what
+  to send instead. Fix the call and send it again; nothing was charged.
+- `INVALID_REQUEST` on an extraction with a schema means the schema has a value that is not valid
+  JSON Schema (check every `type`, `properties` and `items`) and the readers refused it. Correct
+  the schema before retrying; resending it unchanged will not help.
 
 ## Good requests
 
@@ -65,7 +86,7 @@ The `contrie` MCP server in this plugin provides the tools below.
 - Name the unit or format you need in the description ("price as a number, currency as an ISO
   code"), rather than post-processing a guessed string.
 - Use `contrie_read` when you need to understand the page, and `contrie_extract` when you need
-  specific values.
+  specific values. On a long page, bound the read with `maxChars` instead of taking all of it.
 - Stop monitors you no longer need with `contrie_unwatch`; each scheduled run with an accepted
   answer is charged.
 
